@@ -9,6 +9,7 @@ void Model::setConfiguration(ModelConfig &refConfiguration)
 
 Model::Model()
     :   Observable()
+    ,   mLstLanguages()
 { }
 
 Model::~Model()
@@ -51,9 +52,9 @@ ModelConfig &Model::getConfiguration()
     return(mObjModelConfig);
 }
 
-QList<Language> &Model::getLanguages() const
+QList<Language> &Model::getLanguages()
 {
-    return(const_cast<Model &>(*this).mLstLanguages);
+    return(mLstLanguages);
 }
 
 void Model::removeLanguage(const Language &refLanguage)

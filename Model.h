@@ -31,7 +31,7 @@ namespace net
                         void addLanguages(const QList<Language> &lstLanguages);
                         void clearLanguages();
                         ModelConfig &getConfiguration();
-                        QList<Language> &getLanguages() const;
+                        QList<Language> &getLanguages();
                         void removeLanguage(const Language &refLanguage);
                         void removeLanguages(std::initializer_list<Language> &lstLanguages);
                         void setLanguages(const QList<Language> &lstLanguages);

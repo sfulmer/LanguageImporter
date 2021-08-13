@@ -20,7 +20,7 @@ namespace net
                     Q_OBJECT
 
                     App &mRefApp;
-                    Model mObjModel;
+                    Model *mPtrModel;
                 protected:
                     App &getApplication();
                 public:

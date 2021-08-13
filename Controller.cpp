@@ -13,12 +13,16 @@ App &Controller::getApplication()
 
 Controller::Controller(App &refApp)
     :   mRefApp(refApp)
+    ,   mPtrModel(nullptr)
 {
     getModel().getConfiguration().setSource("URL");
 }
 
 Controller::~Controller()
-{ }
+{
+    if(mPtrModel != nullptr)
+        delete mPtrModel;
+}
 
 void Controller::browseForDBPath()
 {
@@ -32,7 +36,10 @@ void Controller::exit()
 
 Model &Controller::getModel()
 {
-    return(mObjModel);
+    if(mPtrModel == nullptr)
+        mPtrModel = new Model();
+
+    return(*mPtrModel);
 }
 
 void Controller::reset()
@@ -43,7 +50,10 @@ void Controller::save()
 
 void Controller::setModel(Model &refModel)
 {
-    mObjModel = refModel;
+    if(mPtrModel != nullptr)
+        delete mPtrModel;
+
+    mPtrModel = new Model(refModel);
 }
 
 void Controller::showConfigDialog()

@@ -69,12 +69,13 @@ QTableView *MainPanel::getDataTable()
         mTblData = new QTableView(this);
         try
             {
-            QList<Language> &lstModel = getModel().getLanguages();
+            Model &refModel = getModel();
+            QList<Language> &lstModel = refModel.getLanguages();
             DataTableModel *model = new DataTableModel(lstModel);
 
             mTblData->setModel(model);
             }
-        catch(QException e)
+        catch(const QException &e)
             {
             qDebug() << e.what();
             }
