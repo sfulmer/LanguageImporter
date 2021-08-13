@@ -3,7 +3,7 @@
 #include "SourceConfigButtonPanel.h"
 #include "SourceConfigDialog.h"
 
-using namespace net::draconia::util::ui;
+using namespace net::draconia::util::languageimporter::ui;
 
 void SourceConfigButtonPanel::cancelClicked()
 {

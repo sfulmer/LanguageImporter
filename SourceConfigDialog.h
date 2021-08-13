@@ -7,7 +7,7 @@
 #include "SourceConfigButtonPanel.h"
 #include "SourceConfigPanel.h"
 
-using net::draconia::util::Controller;
+using net::draconia::util::languageimporter::Controller;
 
 namespace net
 {
@@ -15,29 +15,32 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class SourceConfigDialog : public QDialog
+                namespace ui
                 {
-                    Q_OBJECT
+                    class SourceConfigDialog : public QDialog
+                    {
+                        Q_OBJECT
 
-                    Controller &mRefController;
-                    SourceConfigButtonPanel *mPnlButtons;
-                    SourceConfigPanel *mPnlSourceConfig;
+                        Controller &mRefController;
+                        SourceConfigButtonPanel *mPnlButtons;
+                        SourceConfigPanel *mPnlSourceConfig;
 
-                protected:
-                    SourceConfigButtonPanel *getButtonsPanel();
-                    Controller &getController() const;
-                    SourceConfigPanel *getSourceConfigPanel();
-                    void initControls();
-                    void initDialog();
-                public:
-                    SourceConfigDialog(QWidget *parent);
-                    SourceConfigDialog(QWidget *parent, const Controller &refController);
-                    ~SourceConfigDialog() = default;
+                    protected:
+                        SourceConfigButtonPanel *getButtonsPanel();
+                        Controller &getController() const;
+                        SourceConfigPanel *getSourceConfigPanel();
+                        void initControls();
+                        void initDialog();
+                    public:
+                        SourceConfigDialog(QWidget *parent);
+                        SourceConfigDialog(QWidget *parent, const Controller &refController);
+                        ~SourceConfigDialog() = default;
 
-                    void reject();
-                };
+                        void reject();
+                    };
+                }
             }
         }
     }

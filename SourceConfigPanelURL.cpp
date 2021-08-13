@@ -1,12 +1,16 @@
 #include "App.h"
 #include "ModelConfig.h"
 #include "ModelConfigSourceURL.h"
+#include "ModelSourceConfigEndingObserver.h"
+#include "ModelSourceConfigOpeningObserver.h"
+#include "ModelSourceConfigURLObserver.h"
 #include <QGridLayout>
 #include "SourceConfigPanelURL.h"
 
-using net::draconia::util::model::ModelConfig;
-using net::draconia::util::model::ModelConfigSourceURL;
-using namespace net::draconia::util::ui;
+using net::draconia::util::languageimporter::model::ModelConfig;
+using net::draconia::util::languageimporter::model::ModelConfigSourceURL;
+using namespace net::draconia::util::languageimporter::observers;
+using namespace net::draconia::util::languageimporter::ui;
 
 void SourceConfigPanelURL::endingTextChanged(const QString &sText)
 {
@@ -115,6 +119,7 @@ void SourceConfigPanelURL::initPanel()
 void SourceConfigPanelURL::openingTextChanged(const QString &sText)
 {
     ModelConfig &model = getController().getModel().getConfiguration();
+
     if(model.getSource() == "URL")
         static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setOpening(sText);
 }
@@ -130,7 +135,7 @@ SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent)
     :   SourceConfigPanelURL(parent, static_cast<App *>(qApp)->getController())
 { }
 
-SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent, const Controller &refController)
+SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent, Controller &refController)
     :   SourceConfigPanel(parent, refController)
     ,   mLblEnding(nullptr)
     ,   mLblOpening(nullptr)
@@ -139,6 +144,10 @@ SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent, const Controller &re
     ,   mTxtEnding(nullptr)
     ,   mTxtOpening(nullptr)
 {
+    getModel().addObserver(new ModelSourceConfigURLObserver(getURLText()));
+    getModel().addObserver(new ModelSourceConfigOpeningObserver(getOpeningText()));
+    getModel().addObserver(new ModelSourceConfigEndingObserver(getEndingText()));
+
     initPanel();
 }
 

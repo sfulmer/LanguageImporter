@@ -1,14 +1,17 @@
 #include "ModelConfig.h"
+#include "ModelConfigSourceDatabase.h"
 #include "ModelConfigSourceNull.h"
+#include "ModelConfigSourceText.h"
+#include "ModelConfigSourceURL.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
-void ModelConfig::setSourceConfig(const ModelConfigSource *ptrSourceConfig)
+void ModelConfig::setSourceConfig(ModelConfigSource *ptrSourceConfig)
 {
     if(ptrSourceConfig == nullptr)
         mPtrSourceConfig = new ModelConfigSourceNull();
     else
-        mPtrSourceConfig = const_cast<ModelConfigSource *>(ptrSourceConfig);
+        mPtrSourceConfig = ptrSourceConfig;
 }
 
 ModelConfig::ModelConfig()
@@ -25,23 +28,33 @@ ModelConfig::~ModelConfig()
         delete mPtrSourceConfig;
 }
 
-QString &ModelConfig::getDatabasePath() const
+QString &ModelConfig::getDatabasePath()
 {
-    return(const_cast<ModelConfig &>(*this).msDBPath);
+    return(msDBPath);
 }
 
-QString &ModelConfig::getSource() const
+QString &ModelConfig::getSource()
 {
-    return(const_cast<ModelConfig &>(*this).msSource);
+    return(msSource);
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdangling-else"
 ModelConfigSource &ModelConfig::getSourceConfig()
 {
     if(mPtrSourceConfig == nullptr)
-        mPtrSourceConfig = new ModelConfigSourceNull();
+        if(getSource() == "URL")
+            mPtrSourceConfig = new ModelConfigSourceURL();
+        else if(getSource() == "Text")
+            mPtrSourceConfig = new ModelConfigSourceText();
+        else if(getSource() == "Database")
+            mPtrSourceConfig = new ModelConfigSourceDatabase();
+        else
+            mPtrSourceConfig = new ModelConfigSourceNull();
 
     return(*mPtrSourceConfig);
 }
+#pragma GCC diagnostic pop
 
 void ModelConfig::setDatabasePath(const QString sDBPath)
 {
@@ -55,11 +68,14 @@ void ModelConfig::setSource(const QString &sSource)
 {
     msSource = sSource;
 
+    delete mPtrSourceConfig;
+    mPtrSourceConfig = nullptr;
+
     setChanged();
     notifyObservers("Source");
 }
 
-ModelConfig &ModelConfig::operator=(const ModelConfig &refCopy)
+ModelConfig &ModelConfig::operator=(ModelConfig &refCopy)
 {
     setSourceConfig(refCopy.mPtrSourceConfig);
     setDatabasePath(refCopy.getDatabasePath());
@@ -68,14 +84,14 @@ ModelConfig &ModelConfig::operator=(const ModelConfig &refCopy)
     return(*this);
 }
 
-bool ModelConfig::operator==(const ModelConfig &refOther) const
+bool ModelConfig::operator==(ModelConfig &refOther)
 {
     return  (   (getSource() == refOther.getSource())
             &&  (getDatabasePath() == refOther.getDatabasePath())
             &&  (const_cast<ModelConfig &>(*this).getSourceConfig() == const_cast<ModelConfig &>(refOther).getSourceConfig()));
 }
 
-bool ModelConfig::operator!=(const ModelConfig &refOther) const
+bool ModelConfig::operator!=(ModelConfig &refOther)
 {
     return(!operator==(refOther));
 }

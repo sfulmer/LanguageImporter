@@ -10,26 +10,29 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class SourceConfigButtonPanel : public QWidget
+                namespace ui
                 {
-                    Q_OBJECT
+                    class SourceConfigButtonPanel : public QWidget
+                    {
+                        Q_OBJECT
 
-                    Controller &mRefController;
-                    QPushButton *mBtnCancel, *mBtnOk;
-                protected:
-                    void cancelClicked();
-                    void initControls();
-                    void initPanel();
-                    void okClicked();
-                public:
-                    SourceConfigButtonPanel(QWidget *parent);
-                    SourceConfigButtonPanel(QWidget *parent, const Controller &refController);
+                        Controller &mRefController;
+                        QPushButton *mBtnCancel, *mBtnOk;
+                    protected:
+                        void cancelClicked();
+                        void initControls();
+                        void initPanel();
+                        void okClicked();
+                    public:
+                        SourceConfigButtonPanel(QWidget *parent);
+                        SourceConfigButtonPanel(QWidget *parent, const Controller &refController);
 
-                    QPushButton *getCancelButton();
-                    QPushButton *getOkButton();
-                };
+                        QPushButton *getCancelButton();
+                        QPushButton *getOkButton();
+                    };
+                }
             }
         }
     }

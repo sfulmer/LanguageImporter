@@ -3,8 +3,7 @@
 #include "Observable.h"
 #include <QLineEdit>
 
-using net::draconia::util::Observable;
-using net::draconia::util::Observer;
+using namespace net::draconia::util;
 
 namespace net
 {
@@ -12,20 +11,23 @@ namespace net
     {
         namespace util
         {
-            namespace observers
+            namespace languageimporter
             {
-                class DBPathObserver : public Observer
+                namespace observers
                 {
-                    QLineEdit *mTxtDBPath;
-                protected:
-                    QLineEdit *getDBPathText() const;
-                    void setDBPathText(const QLineEdit *txtDBPath);
-                public:
-                    DBPathObserver(const QLineEdit *txtDBPath);
-                    virtual ~DBPathObserver();
+                    class DBPathObserver : public Observer
+                    {
+                        QLineEdit *mTxtDBPath;
+                    protected:
+                        QLineEdit *getDBPathText() const;
+                        void setDBPathText(QLineEdit *txtDBPath);
+                    public:
+                        DBPathObserver(QLineEdit *txtDBPath);
+                        virtual ~DBPathObserver();
 
-                    virtual void update(const Observable &refObservable, const QString &refProperty);
-                };
+                        virtual void update(Observable &refObservable, const QString &refProperty);
+                    };
+                }
             }
         }
     }

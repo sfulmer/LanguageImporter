@@ -12,34 +12,37 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class SourceConfigPanelURL : public SourceConfigPanel
+                namespace ui
                 {
-                    Q_OBJECT
+                    class SourceConfigPanelURL : public SourceConfigPanel
+                    {
+                        Q_OBJECT
 
-                    QLabel *mLblEnding, *mLblOpening, *mLblURL;
-                    QLineEdit *mTxtURL;
-                    QTextEdit *mTxtEnding, *mTxtOpening;
-                protected:
-                    void endingTextChanged(const QString &sText);
-                    QLabel *getEndingLabel();
-                    QTextEdit *getEndingText();
-                    QLabel *getOpeningLabel();
-                    QTextEdit *getOpeningText();
-                    QLabel *getURLLabel();
-                    QLineEdit *getURLText();
-                    void initControls();
-                    void initPanel();
-                    void openingTextChanged(const QString &sText);
-                    void URLTextChanged(const QString &sText);
-                public:
-                    SourceConfigPanelURL(QWidget *parent);
-                    SourceConfigPanelURL(QWidget *parent, const Controller &refController);
-                    virtual ~SourceConfigPanelURL() = default;
+                        QLabel *mLblEnding, *mLblOpening, *mLblURL;
+                        QLineEdit *mTxtURL;
+                        QTextEdit *mTxtEnding, *mTxtOpening;
+                    protected:
+                        void endingTextChanged(const QString &sText);
+                        QLabel *getEndingLabel();
+                        QTextEdit *getEndingText();
+                        QLabel *getOpeningLabel();
+                        QTextEdit *getOpeningText();
+                        QLabel *getURLLabel();
+                        QLineEdit *getURLText();
+                        void initControls();
+                        void initPanel();
+                        void openingTextChanged(const QString &sText);
+                        void URLTextChanged(const QString &sText);
+                    public:
+                        SourceConfigPanelURL(QWidget *parent);
+                        SourceConfigPanelURL(QWidget *parent, Controller &refController);
+                        virtual ~SourceConfigPanelURL() = default;
 
-                    virtual void reject();
-                };
+                        virtual void reject();
+                    };
+                }
             }
         }
     }

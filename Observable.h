@@ -15,7 +15,7 @@ namespace net
             {
             public:
                 virtual ~Observer() { }
-                virtual void update(const Observable &refObservable, const QString &sProperty) = 0;
+                virtual void update(Observable &refObservable, const QString &sProperty) = 0;
             };
 
             class Observable

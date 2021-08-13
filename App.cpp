@@ -2,7 +2,7 @@
 #include <QMetaType>
 #include <QWindow>
 
-using namespace net::draconia::util;
+using namespace net::draconia::util::languageimporter;
 
 void App::setArguments(int argc, char *argv[])
 {
@@ -17,9 +17,19 @@ void App::showMainWindow()
 
 App::App(int argc, char *argv[])
     :   QApplication(argc, argv)
-    ,   mObjController(*this)
+    ,   mPtrController(nullptr)
 {
     setArguments(argc, argv);
+}
+
+App::~App()
+{
+    if(mPtrController != nullptr)
+        {
+        delete mPtrController;
+
+        mPtrController = nullptr;
+        }
 }
 
 int App::exec()
@@ -34,14 +44,17 @@ void App::exit()
     getMainWindow().close();
 }
 
-QList<QString> &App::getArguments() const
+QList<QString> &App::getArguments()
 {
-    return(const_cast<App &>(*this).mLstArgs);
+    return(mLstArgs);
 }
 
 Controller &App::getController()
 {
-    return(mObjController);
+    if(mPtrController == nullptr)
+        mPtrController = new Controller(*this);
+
+    return(*mPtrController);
 }
 
 MainWindow &App::getMainWindow()

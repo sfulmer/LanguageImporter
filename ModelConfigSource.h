@@ -10,17 +10,20 @@ namespace net
     {
         namespace util
         {
-            namespace model
+            namespace languageimporter
             {
-                class ModelConfigSource : public Observable
+                namespace model
                 {
-                public:
-                    virtual ~ModelConfigSource() = 0;
+                    class ModelConfigSource : public Observable
+                    {
+                    public:
+                        virtual ~ModelConfigSource() = 0;
 
-                    ModelConfigSource &operator=(const ModelConfigSource &refCopy);
-                    bool operator==(const ModelConfigSource &refOther) const;
-                    bool operator!=(const ModelConfigSource &refOther) const;
-                };
+                        ModelConfigSource &operator=(const ModelConfigSource &refCopy);
+                        bool operator==(const ModelConfigSource &refOther) const;
+                        bool operator!=(const ModelConfigSource &refOther) const;
+                    };
+                }
             }
         }
     }

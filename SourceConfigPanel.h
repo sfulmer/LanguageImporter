@@ -6,8 +6,8 @@
 #include <QTextEdit>
 #include <QWidget>
 
-using net::draconia::util::Controller;
-using net::draconia::util::model::ModelConfigSource;
+using net::draconia::util::languageimporter::Controller;
+using net::draconia::util::languageimporter::model::ModelConfigSource;
 
 namespace net
 {
@@ -15,23 +15,26 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class SourceConfigPanel : public QWidget
+                namespace ui
                 {
-                    Q_OBJECT
+                    class SourceConfigPanel : public QWidget
+                    {
+                        Q_OBJECT
 
-                    Controller &mRefController;
-                protected:
-                    Controller &getController() const;
-                    ModelConfigSource &getModel() const;
-                public:
-                    SourceConfigPanel(QWidget *parent);
-                    SourceConfigPanel(QWidget *parent, const Controller &mRefController);
-                    virtual ~SourceConfigPanel() = 0;
+                        Controller &mRefController;
+                    protected:
+                        Controller &getController() const;
+                        ModelConfigSource &getModel() const;
+                    public:
+                        SourceConfigPanel(QWidget *parent);
+                        SourceConfigPanel(QWidget *parent, Controller &mRefController);
+                        virtual ~SourceConfigPanel() = 0;
 
-                    virtual void reject() = 0;
-                };
+                        virtual void reject() = 0;
+                    };
+                }
             }
         }
     }

@@ -1,12 +1,12 @@
 #include "ModelConfigSourceText.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
 ModelConfigSourceText::ModelConfigSourceText()
     :   ModelConfigSource()
 { }
 
-ModelConfigSourceText::ModelConfigSourceText(const ModelConfigSourceText &refCopy)
+ModelConfigSourceText::ModelConfigSourceText(ModelConfigSourceText &refCopy)
     :   ModelConfigSource()
     ,   msText(refCopy.getText())
 { }
@@ -14,9 +14,9 @@ ModelConfigSourceText::ModelConfigSourceText(const ModelConfigSourceText &refCop
 ModelConfigSourceText::~ModelConfigSourceText()
 { }
 
-QString &ModelConfigSourceText::getText() const
+QString &ModelConfigSourceText::getText()
 {
-    return(const_cast<ModelConfigSourceText &>(*this).msText);
+    return(msText);
 }
 
 void ModelConfigSourceText::setText(const QString &sText)
@@ -27,7 +27,7 @@ void ModelConfigSourceText::setText(const QString &sText)
     notifyObservers("Text");
 }
 
-ModelConfigSourceText &ModelConfigSourceText::operator=(const ModelConfigSourceText &refCopy)
+ModelConfigSourceText &ModelConfigSourceText::operator=(ModelConfigSourceText &refCopy)
 {
     ModelConfigSource::operator=(refCopy);
 
@@ -36,12 +36,12 @@ ModelConfigSourceText &ModelConfigSourceText::operator=(const ModelConfigSourceT
     return(*this);
 }
 
-bool ModelConfigSourceText::operator==(const ModelConfigSourceText &refOther) const
+bool ModelConfigSourceText::operator==(ModelConfigSourceText &refOther)
 {
     return(ModelConfigSource::operator==(refOther) && (getText() == refOther.getText()));
 }
 
-bool ModelConfigSourceText::operator!=(const ModelConfigSourceText &refOther) const
+bool ModelConfigSourceText::operator!=(ModelConfigSourceText &refOther)
 {
     return(!operator==(refOther));
 }

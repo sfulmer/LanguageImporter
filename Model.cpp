@@ -1,8 +1,8 @@
 #include "Model.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
-void Model::setConfiguration(const ModelConfig &refConfiguration)
+void Model::setConfiguration(ModelConfig &refConfiguration)
 {
     mObjModelConfig = refConfiguration;
 }
@@ -38,9 +38,17 @@ void Model::addLanguages(const QList<Language> &lstLanguages)
     notifyObservers("Languages");
 }
 
-ModelConfig &Model::getConfiguration() const
+void Model::clearLanguages()
 {
-    return(const_cast<Model &>(*this).mObjModelConfig);
+    getLanguages().clear();
+
+    setChanged();
+    notifyObservers("Languages");
+}
+
+ModelConfig &Model::getConfiguration()
+{
+    return(mObjModelConfig);
 }
 
 QList<Language> &Model::getLanguages() const
@@ -73,7 +81,7 @@ void Model::setLanguages(const QList<Language> &lstLanguages)
     notifyObservers("Languages");
 }
 
-Model &Model::operator=(const Model &refCopy)
+Model &Model::operator=(Model &refCopy)
 {
     setConfiguration(refCopy.getConfiguration());
     setLanguages(refCopy.getLanguages());
@@ -81,13 +89,13 @@ Model &Model::operator=(const Model &refCopy)
     return(*this);
 }
 
-bool Model::operator==(const Model &refOther) const
+bool Model::operator==(Model &refOther)
 {
     return  (   (getConfiguration() == refOther.getConfiguration())
             &&  (getLanguages() == refOther.getLanguages()));
 }
 
-bool Model::operator!=(const Model &refOther) const
+bool Model::operator!=(Model &refOther)
 {
     return(!operator==(refOther));
 }

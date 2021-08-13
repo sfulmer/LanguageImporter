@@ -1,32 +1,32 @@
 #include "DBPathObserver.h"
 #include "ModelConfig.h"
 
-using net::draconia::util::model::ModelConfig;
-using namespace net::draconia::util::observers;
+using net::draconia::util::languageimporter::model::ModelConfig;
+using namespace net::draconia::util::languageimporter::observers;
 
 QLineEdit *DBPathObserver::getDBPathText() const
 {
     return(mTxtDBPath);
 }
 
-void DBPathObserver::setDBPathText(const QLineEdit *txtDBPath)
+void DBPathObserver::setDBPathText(QLineEdit *txtDBPath)
 {
-    mTxtDBPath = const_cast<QLineEdit *>(txtDBPath);
+    mTxtDBPath = txtDBPath;
 }
 
-DBPathObserver::DBPathObserver(const QLineEdit *txtDBPath)
+DBPathObserver::DBPathObserver(QLineEdit *txtDBPath)
     :   Observer()
-    ,   mTxtDBPath(const_cast<QLineEdit *>(txtDBPath))
+    ,   mTxtDBPath(txtDBPath)
 { }
 
 DBPathObserver::~DBPathObserver()
 { }
 
-void DBPathObserver::update(const Observable &refObservable, const QString &sProperty)
+void DBPathObserver::update(Observable &refObservable, const QString &sProperty)
 {
     Q_UNUSED(sProperty);
 
-    ModelConfig &refModel = static_cast<ModelConfig &>(const_cast<Observable &>(refObservable));
+    ModelConfig &refModel = static_cast<ModelConfig &>(refObservable);
     const QString &sText = getDBPathText()->text();
 
     if(refModel.getDatabasePath() != sText)

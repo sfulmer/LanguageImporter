@@ -1,6 +1,6 @@
 #include "ModelConfigSourceNull.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
 ModelConfigSourceNull::ModelConfigSourceNull()
     :   ModelConfigSource()

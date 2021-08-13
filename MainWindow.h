@@ -9,21 +9,24 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class MainWindow : public QMainWindow
+                namespace ui
                 {
-                    Q_OBJECT
+                    class MainWindow : public QMainWindow
+                    {
+                        Q_OBJECT
 
-                    MainPanel *mPnlMain;
-                protected:
-                    MainPanel *getMainPanel();
-                    void initControls();
-                    void initWindow();
-                public:
-                    explicit MainWindow(QWidget *parent = nullptr);
-                    ~MainWindow();
-                };
+                        MainPanel *mPnlMain;
+                    protected:
+                        MainPanel *getMainPanel();
+                        void initControls();
+                        void initWindow();
+                    public:
+                        MainWindow(QWidget *parent = nullptr);
+                        ~MainWindow();
+                    };
+                }
             }
         }
     }

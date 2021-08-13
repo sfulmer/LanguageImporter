@@ -5,8 +5,8 @@
 #include "SourceConfigPanelURL.h"
 #include "SourceConfigDialog.h"
 
-using net::draconia::util::model::ModelConfig;
-using namespace net::draconia::util::ui;
+using net::draconia::util::languageimporter::model::ModelConfig;
+using namespace net::draconia::util::languageimporter::ui;
 
 SourceConfigButtonPanel *SourceConfigDialog::getButtonsPanel()
 {

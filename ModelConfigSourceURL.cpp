@@ -1,12 +1,12 @@
 #include "ModelConfigSourceURL.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
 ModelConfigSourceURL::ModelConfigSourceURL()
     :   ModelConfigSource()
 { }
 
-ModelConfigSourceURL::ModelConfigSourceURL(const ModelConfigSourceURL &refCopy)
+ModelConfigSourceURL::ModelConfigSourceURL(ModelConfigSourceURL &refCopy)
     :   ModelConfigSource()
     ,   msEnding(refCopy.getEnding())
     ,   msOpening(refCopy.getOpening())
@@ -16,19 +16,19 @@ ModelConfigSourceURL::ModelConfigSourceURL(const ModelConfigSourceURL &refCopy)
 ModelConfigSourceURL::~ModelConfigSourceURL()
 { }
 
-QString &ModelConfigSourceURL::getEnding() const
+QString &ModelConfigSourceURL::getEnding()
 {
-    return(const_cast<ModelConfigSourceURL &>(*this).msEnding);
+    return(msEnding);
 }
 
-QString &ModelConfigSourceURL::getOpening() const
+QString &ModelConfigSourceURL::getOpening()
 {
-    return(const_cast<ModelConfigSourceURL &>(*this).msOpening);
+    return(msOpening);
 }
 
-QString &ModelConfigSourceURL::getURL() const
+QString &ModelConfigSourceURL::getURL()
 {
-    return(const_cast<ModelConfigSourceURL &>(*this).msURL);
+    return(msURL);
 }
 
 void ModelConfigSourceURL::setEnding(const QString &sEnding)
@@ -55,7 +55,7 @@ void ModelConfigSourceURL::setURL(const QString &sURL)
     notifyObservers("URL");
 }
 
-ModelConfigSourceURL &ModelConfigSourceURL::operator=(const ModelConfigSourceURL &refCopy)
+ModelConfigSourceURL &ModelConfigSourceURL::operator=(ModelConfigSourceURL &refCopy)
 {
     setEnding(refCopy.getEnding());
     setOpening(refCopy.getOpening());
@@ -64,14 +64,14 @@ ModelConfigSourceURL &ModelConfigSourceURL::operator=(const ModelConfigSourceURL
     return(*this);
 }
 
-bool ModelConfigSourceURL::operator==(const ModelConfigSourceURL &refOther) const
+bool ModelConfigSourceURL::operator==(ModelConfigSourceURL &refOther)
 {
     return  (   (getEnding() == refOther.getEnding())
             &&  (getOpening() == refOther.getOpening())
             &&  (getURL() == refOther.getURL()));
 }
 
-bool ModelConfigSourceURL::operator!=(const ModelConfigSourceURL &refOther) const
+bool ModelConfigSourceURL::operator!=(ModelConfigSourceURL &refOther)
 {
     return(!operator==(refOther));
 }

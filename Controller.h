@@ -3,7 +3,7 @@
 #include "Model.h"
 #include <QObject>
 
-using net::draconia::util::model::Model;
+using net::draconia::util::languageimporter::model::Model;
 
 namespace net
 {
@@ -11,28 +11,31 @@ namespace net
     {
         namespace util
         {
-            class App;
-
-            class Controller : public QObject
+            namespace languageimporter
             {
-                Q_OBJECT
+                class App;
 
-                App &mRefApp;
-                Model mObjModel;
-            protected:
-                App &getApplication();
-            public:
-                Controller(App &refApp);
-                ~Controller();
+                class Controller : public QObject
+                {
+                    Q_OBJECT
 
-                void browseForDBPath();
-                void exit();
-                Model &getModel() const;
-                void reset();
-                void save();
-                void setModel(const Model &refModel);
-                void showConfigDialog();
-            };
+                    App &mRefApp;
+                    Model mObjModel;
+                protected:
+                    App &getApplication();
+                public:
+                    Controller(App &refApp);
+                    ~Controller();
+
+                    void browseForDBPath();
+                    void exit();
+                    Model &getModel();
+                    void reset();
+                    void save();
+                    void setModel(Model &refModel);
+                    void showConfigDialog();
+                };
+            }
         }
     }
 }

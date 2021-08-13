@@ -3,8 +3,8 @@
 #include <QFileDialog>
 #include "SourceConfigDialog.h"
 
-using namespace net::draconia::util;
-using net::draconia::util::ui::SourceConfigDialog;
+using namespace net::draconia::util::languageimporter;
+using net::draconia::util::languageimporter::ui::SourceConfigDialog;
 
 App &Controller::getApplication()
 {
@@ -30,9 +30,9 @@ void Controller::exit()
     getApplication().exit();
 }
 
-Model &Controller::getModel() const
+Model &Controller::getModel()
 {
-    return(const_cast<Controller &>(*this).mObjModel);
+    return(mObjModel);
 }
 
 void Controller::reset()
@@ -41,7 +41,7 @@ void Controller::reset()
 void Controller::save()
 { }
 
-void Controller::setModel(const Model &refModel)
+void Controller::setModel(Model &refModel)
 {
     mObjModel = refModel;
 }

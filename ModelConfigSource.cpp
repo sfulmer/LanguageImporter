@@ -1,6 +1,6 @@
 #include "ModelConfigSource.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
 ModelConfigSource::~ModelConfigSource()
 { }

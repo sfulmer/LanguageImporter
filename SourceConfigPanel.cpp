@@ -1,7 +1,7 @@
 #include "App.h"
 #include "SourceConfigPanel.h"
 
-using namespace net::draconia::util::ui;
+using namespace net::draconia::util::languageimporter::ui;
 
 Controller &SourceConfigPanel::getController() const
 {
@@ -17,9 +17,9 @@ SourceConfigPanel::SourceConfigPanel(QWidget *parent)
     :   SourceConfigPanel(parent, static_cast<App *>(qApp)->getController())
 { }
 
-SourceConfigPanel::SourceConfigPanel(QWidget *parent, const Controller &mRefController)
+SourceConfigPanel::SourceConfigPanel(QWidget *parent, Controller &mRefController)
     :   QWidget(parent)
-    ,   mRefController(const_cast<Controller &>(mRefController))
+    ,   mRefController(mRefController)
 { }
 
 SourceConfigPanel::~SourceConfigPanel()

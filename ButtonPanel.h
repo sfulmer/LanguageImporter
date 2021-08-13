@@ -4,7 +4,7 @@
 #include <QPushButton>
 #include <QWidget>
 
-using net::draconia::util::Controller;
+using net::draconia::util::languageimporter::Controller;
 
 namespace net
 {
@@ -12,26 +12,29 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class ButtonPanel : public QWidget
+                namespace ui
                 {
-                    Q_OBJECT
+                    class ButtonPanel : public QWidget
+                    {
+                        Q_OBJECT
 
-                    Controller &mRefController;
-                    QPushButton *mBtnReset, *mBtnSave;
-                protected:
-                    void doReset();
-                    void doSave();
-                    Controller &getController() const;
-                    QPushButton *getResetButton();
-                    QPushButton *getSaveButton();
-                    void initControls() const;
-                    void initPanel() const;
-                public:
-                    ButtonPanel(QWidget *parent, Controller &refController);
-                    ~ButtonPanel();
-                };
+                        Controller &mRefController;
+                        QPushButton *mBtnReset, *mBtnSave;
+                    protected:
+                        void doReset();
+                        void doSave();
+                        Controller &getController() const;
+                        QPushButton *getResetButton();
+                        QPushButton *getSaveButton();
+                        void initControls();
+                        void initPanel();
+                    public:
+                        ButtonPanel(QWidget *parent, Controller &refController);
+                        ~ButtonPanel();
+                    };
+                }
             }
         }
     }

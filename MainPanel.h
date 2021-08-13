@@ -5,10 +5,10 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QTableWidget>
+#include <QTableView>
 #include <QWidget>
 
-using net::draconia::util::Controller;
+using net::draconia::util::languageimporter::Controller;
 
 namespace net
 {
@@ -16,41 +16,44 @@ namespace net
     {
         namespace util
         {
-            namespace ui
+            namespace languageimporter
             {
-                class MainPanel : public QWidget
+                namespace ui
                 {
-                    Q_OBJECT
+                    class MainPanel : public QWidget
+                    {
+                        Q_OBJECT
 
-                    ButtonPanel *mPnlButtons;
-                    QComboBox *mCboSource;
-                    QLabel *mLblDBPath, *mLblSource;
-                    QLineEdit *mTxtDBPath;
-                    QPushButton *mBtnBrowse, *mBtnConfig;
-                    QTableWidget *mTblData;
-                protected:
-                    void dbPathChanged(const QString &sDBPath);
-                    void doBrowse();
-                    void doConfig();
-                    QPushButton *getBrowseButton();
-                    ButtonPanel *getButtonPanel();
-                    QPushButton *getConfigButton();
-                    Controller &getController() const;
-                    QTableWidget *getDataTable();
-                    QLabel *getDBPathLabel();
-                    QLineEdit *getDBPathText();
-                    Model &getModel();
-                    QComboBox *getSourceComboBox();
-                    QLabel *getSourceLabel();
-                    void initControls();
-                    void initPanel();
-                    virtual void resizeEvent(QResizeEvent *event);
-                    void sourceChanged(const QString &sSource);
-                public:
-                    MainPanel(QWidget *parent);
-                    MainPanel(QWidget *parent, const Controller &refController);
-                    ~MainPanel();
-                };
+                        ButtonPanel *mPnlButtons;
+                        QComboBox *mCboSource;
+                        QLabel *mLblDBPath, *mLblSource;
+                        QLineEdit *mTxtDBPath;
+                        QPushButton *mBtnBrowse, *mBtnConfig;
+                        QTableView *mTblData;
+                    protected:
+                        void dbPathChanged(QString &sDBPath);
+                        void doBrowse();
+                        void doConfig();
+                        QPushButton *getBrowseButton();
+                        ButtonPanel *getButtonPanel();
+                        QPushButton *getConfigButton();
+                        Controller &getController() const;
+                        QTableView *getDataTable();
+                        QLabel *getDBPathLabel();
+                        QLineEdit *getDBPathText();
+                        Model &getModel();
+                        QComboBox *getSourceComboBox();
+                        QLabel *getSourceLabel();
+                        void initControls();
+                        void initPanel();
+                        virtual void resizeEvent(QResizeEvent *event);
+                        void sourceChanged(QString &sSource);
+                    public:
+                        MainPanel(QWidget *parent);
+                        MainPanel(QWidget *parent, const Controller &refController);
+                        ~MainPanel();
+                    };
+                }
             }
         }
     }

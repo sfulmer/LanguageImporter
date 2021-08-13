@@ -9,27 +9,30 @@ namespace net
     {
         namespace util
         {
-            namespace model
+            namespace languageimporter
             {
-                class ModelConfigSourceURL : public ModelConfigSource
+                namespace model
                 {
-                    QString msEnding, msOpening, msURL;
-                public:
-                    ModelConfigSourceURL();
-                    ModelConfigSourceURL(const ModelConfigSourceURL &refCopy);
-                    virtual ~ModelConfigSourceURL();
+                    class ModelConfigSourceURL : public ModelConfigSource
+                    {
+                        QString msEnding, msOpening, msURL;
+                    public:
+                        ModelConfigSourceURL();
+                        ModelConfigSourceURL(ModelConfigSourceURL &refCopy);
+                        virtual ~ModelConfigSourceURL();
 
-                    QString &getEnding() const;
-                    QString &getOpening() const;
-                    QString &getURL() const;
-                    void setEnding(const QString &sEnding);
-                    void setOpening(const QString &sOpening);
-                    void setURL(const QString &sURL);
+                        QString &getEnding();
+                        QString &getOpening();
+                        QString &getURL();
+                        void setEnding(const QString &sEnding);
+                        void setOpening(const QString &sOpening);
+                        void setURL(const QString &sURL);
 
-                    ModelConfigSourceURL &operator=(const ModelConfigSourceURL &refCopy);
-                    bool operator==(const ModelConfigSourceURL &refOther) const;
-                    bool operator!=(const ModelConfigSourceURL &refOther) const;
-                };
+                        ModelConfigSourceURL &operator=(ModelConfigSourceURL &refCopy);
+                        bool operator==(ModelConfigSourceURL &refOther);
+                        bool operator!=(ModelConfigSourceURL &refOther);
+                    };
+                }
             }
         }
     }

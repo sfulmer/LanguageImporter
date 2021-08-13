@@ -1,12 +1,16 @@
 #include "App.h"
+#include "DataTableModel.h"
 #include "DBPathObserver.h"
 #include "MainPanel.h"
+#include <QDebug>
+#include <QException>
 #include <QGridLayout>
 
-using net::draconia::util::observers::DBPathObserver;
-using namespace net::draconia::util::ui;
+using net::draconia::util::languageimporter::observers::DBPathObserver;
+using namespace net::draconia::util::languageimporter::ui;
+using net::draconia::util::languageimporter::ui::model::DataTableModel;
 
-void MainPanel::dbPathChanged(const QString &sDBPath)
+void MainPanel::dbPathChanged(QString &sDBPath)
 {
     getModel().getConfiguration().setDatabasePath(sDBPath);
 }
@@ -58,10 +62,23 @@ Controller &MainPanel::getController() const
     return(static_cast<App *>(QCoreApplication::instance())->getController());
 }
 
-QTableWidget *MainPanel::getDataTable()
+QTableView *MainPanel::getDataTable()
 {
     if(mTblData == nullptr)
-        mTblData = new QTableWidget(this);
+        {
+        mTblData = new QTableView(this);
+        try
+            {
+            QList<Language> &lstModel = getModel().getLanguages();
+            DataTableModel *model = new DataTableModel(lstModel);
+
+            mTblData->setModel(model);
+            }
+        catch(QException e)
+            {
+            qDebug() << e.what();
+            }
+        }
 
     return(mTblData);
 }
@@ -83,6 +100,7 @@ QLineEdit *MainPanel::getDBPathText()
     if(mTxtDBPath == nullptr)
         {
         mTxtDBPath = new QLineEdit(this);
+        mTxtDBPath->setContextMenuPolicy(Qt::ContextMenuPolicy::DefaultContextMenu);
 
         connect(mTxtDBPath, SIGNAL(QLineEdit::textChanged(QString&)), this, SLOT(MainWindow::dbPathChanged(QString&)));
         }
@@ -156,7 +174,7 @@ void MainPanel::resizeEvent(QResizeEvent *event)
     getModel().getConfiguration().addObserver(new DBPathObserver(getDBPathText()));
 }
 
-void MainPanel::sourceChanged(const QString &sSource)
+void MainPanel::sourceChanged(QString &sSource)
 {
     getModel().getConfiguration().setSource(sSource);
 }

@@ -1,7 +1,7 @@
 #include "ButtonPanel.h"
 #include <QHBoxLayout>
 
-using namespace net::draconia::util::ui;
+using namespace net::draconia::util::languageimporter::ui;
 
 void ButtonPanel::doReset()
 {
@@ -42,22 +42,19 @@ QPushButton *ButtonPanel::getSaveButton()
     return(mBtnSave);
 }
 
-void ButtonPanel::initControls() const
+void ButtonPanel::initControls()
 {
-    ButtonPanel *ptrThis = const_cast<ButtonPanel *>(this);
-    QLayout *layout = new QHBoxLayout(ptrThis);
+    QLayout *layout = new QHBoxLayout(this);
 
-    layout->addWidget(ptrThis->getResetButton());
-    layout->addWidget(ptrThis->getSaveButton());
+    layout->addWidget(getResetButton());
+    layout->addWidget(getSaveButton());
 
-    ptrThis->setLayout(layout);
+    setLayout(layout);
 }
 
-void ButtonPanel::initPanel() const
+void ButtonPanel::initPanel()
 {
-    ButtonPanel *ptrThis = const_cast<ButtonPanel *>(this);
-
-    ptrThis->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     initControls();
 }

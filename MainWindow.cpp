@@ -2,7 +2,7 @@
 #include "MainWindow.h"
 #include <QGridLayout>
 
-using namespace net::draconia::util::ui;
+using namespace net::draconia::util::languageimporter::ui;
 
 MainPanel *MainWindow::getMainPanel()
 {

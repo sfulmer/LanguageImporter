@@ -13,7 +13,9 @@ SOURCES += \
     ButtonPanel.cpp \
     Controller.cpp \
     DBPathObserver.cpp \
+    DataTableModel.cpp \
     Language.cpp \
+    LanguageObserver.cpp \
     MainPanel.cpp \
     Model.cpp \
     ModelConfig.cpp \
@@ -22,11 +24,15 @@ SOURCES += \
     ModelConfigSourceNull.cpp \
     ModelConfigSourceText.cpp \
     ModelConfigSourceURL.cpp \
+    ModelSourceConfigEndingObserver.cpp \
+    ModelSourceConfigOpeningObserver.cpp \
+    ModelSourceConfigURLObserver.cpp \
     Observable.cpp \
     SourceConfigButtonPanel.cpp \
     SourceConfigDialog.cpp \
     SourceConfigPanel.cpp \
     SourceConfigPanelURL.cpp \
+    URLSourceObserver.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -35,7 +41,9 @@ HEADERS += \
     ButtonPanel.h \
     Controller.h \
     DBPathObserver.h \
+    DataTableModel.h \
     Language.h \
+    LanguageObserver.h \
     MainPanel.h \
     MainWindow.h \
     Model.h \
@@ -45,11 +53,15 @@ HEADERS += \
     ModelConfigSourceNull.h \
     ModelConfigSourceText.h \
     ModelConfigSourceURL.h \
+    ModelSourceConfigEndingObserver.h \
+    ModelSourceConfigOpeningObserver.h \
+    ModelSourceConfigURLObserver.h \
     Observable.h \
     SourceConfigButtonPanel.h \
     SourceConfigDialog.h \
     SourceConfigPanel.h \
-    SourceConfigPanelURL.h
+    SourceConfigPanelURL.h \
+    URLSourceObserver.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

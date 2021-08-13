@@ -1,12 +1,12 @@
 #include "ModelConfigSourceDatabase.h"
 
-using namespace net::draconia::util::model;
+using namespace net::draconia::util::languageimporter::model;
 
 ModelConfigSourceDatabase::ModelConfigSourceDatabase()
     :   ModelConfigSource()
 { }
 
-ModelConfigSourceDatabase::ModelConfigSourceDatabase(const ModelConfigSourceDatabase &refCopy)
+ModelConfigSourceDatabase::ModelConfigSourceDatabase(ModelConfigSourceDatabase &refCopy)
     :   ModelConfigSource()
     ,   msDatabase(refCopy.getDatabase())
     ,   msDriver(refCopy.getDriver())
@@ -18,29 +18,29 @@ ModelConfigSourceDatabase::ModelConfigSourceDatabase(const ModelConfigSourceData
 ModelConfigSourceDatabase::~ModelConfigSourceDatabase()
 { }
 
-QString &ModelConfigSourceDatabase::getDatabase() const
+QString &ModelConfigSourceDatabase::getDatabase()
 {
-    return(const_cast<ModelConfigSourceDatabase &>(*this).msDatabase);
+    return(msDatabase);
 }
 
-QString &ModelConfigSourceDatabase::getDriver() const
+QString &ModelConfigSourceDatabase::getDriver()
 {
-    return(const_cast<ModelConfigSourceDatabase &>(*this).msDriver);
+    return(msDriver);
 }
 
-QString &ModelConfigSourceDatabase::getLanguageField() const
+QString &ModelConfigSourceDatabase::getLanguageField()
 {
-    return(const_cast<ModelConfigSourceDatabase &>(*this).msLanguageField);
+    return(msLanguageField);
 }
 
-QString &ModelConfigSourceDatabase::getLocaleField() const
+QString &ModelConfigSourceDatabase::getLocaleField()
 {
-    return(const_cast<ModelConfigSourceDatabase &>(*this).msLocaleField);
+    return(msLocaleField);
 }
 
-QString &ModelConfigSourceDatabase::getTable() const
+QString &ModelConfigSourceDatabase::getTable()
 {
-    return(const_cast<ModelConfigSourceDatabase &>(*this).msTable);
+    return(msTable);
 }
 
 void ModelConfigSourceDatabase::setDatabase(const QString &sDatabase)
@@ -83,7 +83,7 @@ void ModelConfigSourceDatabase::setTable(const QString &sTable)
     notifyObservers("Table");
 }
 
-ModelConfigSourceDatabase &ModelConfigSourceDatabase::operator=(const ModelConfigSourceDatabase &refCopy)
+ModelConfigSourceDatabase &ModelConfigSourceDatabase::operator=(ModelConfigSourceDatabase &refCopy)
 {
     ModelConfigSource::operator=(refCopy);
 
@@ -96,7 +96,7 @@ ModelConfigSourceDatabase &ModelConfigSourceDatabase::operator=(const ModelConfi
     return(*this);
 }
 
-bool ModelConfigSourceDatabase::operator==(const ModelConfigSourceDatabase &refOther) const
+bool ModelConfigSourceDatabase::operator==(ModelConfigSourceDatabase &refOther)
 {
     return  (   (getDatabase() == refOther.getDatabase())
             &&  (getDriver() == refOther.getDriver())
@@ -105,7 +105,7 @@ bool ModelConfigSourceDatabase::operator==(const ModelConfigSourceDatabase &refO
             &&  (getTable() == refOther.getTable()));
 }
 
-bool ModelConfigSourceDatabase::operator!=(const ModelConfigSourceDatabase &refOther) const
+bool ModelConfigSourceDatabase::operator!=(ModelConfigSourceDatabase &refOther)
 {
     return(!operator==(refOther));
 }

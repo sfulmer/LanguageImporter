@@ -8,19 +8,22 @@ namespace net
     {
         namespace util
         {
-            namespace model
+            namespace languageimporter
             {
-                class ModelConfigSourceNull : public ModelConfigSource
+                namespace model
                 {
-                public:
-                    ModelConfigSourceNull();
-                    ModelConfigSourceNull(const ModelConfigSourceNull &refCopy);
-                    virtual ~ModelConfigSourceNull();
+                    class ModelConfigSourceNull : public ModelConfigSource
+                    {
+                    public:
+                        ModelConfigSourceNull();
+                        ModelConfigSourceNull(const ModelConfigSourceNull &refCopy);
+                        virtual ~ModelConfigSourceNull();
 
-                    ModelConfigSourceNull &operator=(const ModelConfigSourceNull &refCopy);
-                    bool operator==(const ModelConfigSourceNull &refOther) const;
-                    bool operator!=(const ModelConfigSourceNull &refOther) const;
-                };
+                        ModelConfigSourceNull &operator=(const ModelConfigSourceNull &refCopy);
+                        bool operator==(const ModelConfigSourceNull &refOther) const;
+                        bool operator!=(const ModelConfigSourceNull &refOther) const;
+                    };
+                }
             }
         }
     }

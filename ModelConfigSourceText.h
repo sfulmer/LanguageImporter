@@ -9,23 +9,26 @@ namespace net
     {
         namespace util
         {
-            namespace model
+            namespace languageimporter
             {
-                class ModelConfigSourceText : public ModelConfigSource
+                namespace model
                 {
-                    QString msText;
-                public:
-                    ModelConfigSourceText();
-                    ModelConfigSourceText(const ModelConfigSourceText &refCopy);
-                    virtual ~ModelConfigSourceText();
+                    class ModelConfigSourceText : public ModelConfigSource
+                    {
+                        QString msText;
+                    public:
+                        ModelConfigSourceText();
+                        ModelConfigSourceText(ModelConfigSourceText &refCopy);
+                        virtual ~ModelConfigSourceText();
 
-                    QString &getText() const;
-                    void setText(const QString &sText);
+                        QString &getText();
+                        void setText(const QString &sText);
 
-                    ModelConfigSourceText &operator=(const ModelConfigSourceText &refCopy);
-                    bool operator==(const ModelConfigSourceText &refOther) const;
-                    bool operator!=(const ModelConfigSourceText &refOther) const;
-                };
+                        ModelConfigSourceText &operator=(ModelConfigSourceText &refCopy);
+                        bool operator==(ModelConfigSourceText &refOther);
+                        bool operator!=(ModelConfigSourceText &refOther);
+                    };
+                }
             }
         }
     }
