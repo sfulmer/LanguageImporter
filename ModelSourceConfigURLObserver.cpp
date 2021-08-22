@@ -9,11 +9,6 @@ QLineEdit *ModelSourceConfigURLObserver::getURLText()
     return(mTxtURL);
 }
 
-void ModelSourceConfigURLObserver::setURLText(QLineEdit *txtURL)
-{
-    mTxtURL = txtURL;
-}
-
 ModelSourceConfigURLObserver::ModelSourceConfigURLObserver(QLineEdit *txtURL)
     :   Observer()
     ,   mTxtURL(txtURL)

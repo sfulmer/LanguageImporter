@@ -2,6 +2,7 @@
 #include "ModelConfig.h"
 #include <QVBoxLayout>
 #include "SourceConfigButtonPanel.h"
+#include "SourceConfigPanelText.h"
 #include "SourceConfigPanelURL.h"
 #include "SourceConfigDialog.h"
 
@@ -27,6 +28,8 @@ SourceConfigPanel *SourceConfigDialog::getSourceConfigPanel()
 
     if(model.getSource() == "URL")
         mPnlSourceConfig = new SourceConfigPanelURL(this, getController());
+    else if(model.getSource() == "Text")
+        mPnlSourceConfig = new SourceConfigPanelText(this, getController());
 
     return(mPnlSourceConfig);
 }

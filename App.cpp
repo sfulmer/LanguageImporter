@@ -1,6 +1,4 @@
 #include "App.h"
-#include <QMetaType>
-#include <QWindow>
 
 using namespace net::draconia::util::languageimporter;
 
@@ -12,11 +10,12 @@ void App::setArguments(int argc, char *argv[])
 
 void App::showMainWindow()
 {
-    getMainWindow().show();
+    getMainWindow()->show();
 }
 
 App::App(int argc, char *argv[])
     :   QApplication(argc, argv)
+    ,   mWndMain(nullptr)
     ,   mPtrController(nullptr)
 {
     setArguments(argc, argv);
@@ -30,6 +29,9 @@ App::~App()
 
         mPtrController = nullptr;
         }
+
+    if(mWndMain != nullptr)
+        delete mWndMain;
 }
 
 int App::exec()
@@ -41,7 +43,9 @@ int App::exec()
 
 void App::exit()
 {
-    getMainWindow().close();
+    MainWindow *wnd = getMainWindow();
+
+    wnd->close();
 }
 
 QList<QString> &App::getArguments()
@@ -57,7 +61,10 @@ Controller &App::getController()
     return(*mPtrController);
 }
 
-MainWindow &App::getMainWindow()
+MainWindow *App::getMainWindow()
 {
+    if(mWndMain == nullptr)
+        mWndMain = new MainWindow(nullptr);
+
     return(mWndMain);
 }

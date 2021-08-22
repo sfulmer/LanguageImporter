@@ -32,6 +32,7 @@ namespace net
                         SourceConfigPanel(QWidget *parent, Controller &mRefController);
                         virtual ~SourceConfigPanel() = 0;
 
+                        virtual bool isOkAble() = 0;
                         virtual void reject() = 0;
                     };
                 }

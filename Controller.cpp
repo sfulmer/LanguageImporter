@@ -26,7 +26,7 @@ Controller::~Controller()
 
 void Controller::browseForDBPath()
 {
-    getModel().getConfiguration().setDatabasePath(QFileDialog::getOpenFileName(&(getApplication().getMainWindow()), tr("Identify Database Path")));
+    getModel().getConfiguration().setDatabasePath(QFileDialog::getOpenFileName(getApplication().getMainWindow(), tr("Identify Database Path")));
 }
 
 void Controller::exit()
@@ -58,7 +58,7 @@ void Controller::setModel(Model &refModel)
 
 void Controller::showConfigDialog()
 {
-    SourceConfigDialog *dialog = new SourceConfigDialog(&(getApplication().getMainWindow()), *this);
+    SourceConfigDialog *dialog = new SourceConfigDialog(getApplication().getMainWindow(), *this);
 
     dialog->exec();
 

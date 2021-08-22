@@ -10,7 +10,7 @@ using net::draconia::util::languageimporter::observers::DBPathObserver;
 using namespace net::draconia::util::languageimporter::ui;
 using net::draconia::util::languageimporter::ui::model::DataTableModel;
 
-void MainPanel::dbPathChanged(QString &sDBPath)
+void MainPanel::dbPathChanged(const QString &sDBPath)
 {
     getModel().getConfiguration().setDatabasePath(sDBPath);
 }
@@ -103,7 +103,7 @@ QLineEdit *MainPanel::getDBPathText()
         mTxtDBPath = new QLineEdit(this);
         mTxtDBPath->setContextMenuPolicy(Qt::ContextMenuPolicy::DefaultContextMenu);
 
-        connect(mTxtDBPath, SIGNAL(QLineEdit::textChanged(QString&)), this, SLOT(MainWindow::dbPathChanged(QString&)));
+        connect(mTxtDBPath, SIGNAL(textChanged(const QString&)), this, SLOT(dbPathChanged(const QString&)));
         }
 
     return(mTxtDBPath);
@@ -124,7 +124,7 @@ QComboBox *MainPanel::getSourceComboBox()
         mCboSource->setCurrentIndex(0);
         mCboSource->setEditable(false);
 
-        connect(mCboSource, SIGNAL(QComboBox::currentTextChanged(QString&)), this, SLOT(MainPanel::sourceChanged(QString&)));
+        connect(mCboSource, &QComboBox::currentTextChanged, this, &MainPanel::sourceChanged);
         }
 
     return(mCboSource);
@@ -175,7 +175,7 @@ void MainPanel::resizeEvent(QResizeEvent *event)
     getModel().getConfiguration().addObserver(new DBPathObserver(getDBPathText()));
 }
 
-void MainPanel::sourceChanged(QString &sSource)
+void MainPanel::sourceChanged(const QString &sSource)
 {
     getModel().getConfiguration().setSource(sSource);
 }

@@ -24,7 +24,6 @@ namespace net
                         QLineEdit *mTxtURL;
                         QTextEdit *mTxtEnding, *mTxtOpening;
                     protected:
-                        void endingTextChanged(const QString &sText);
                         QLabel *getEndingLabel();
                         QTextEdit *getEndingText();
                         QLabel *getOpeningLabel();
@@ -33,14 +32,17 @@ namespace net
                         QLineEdit *getURLText();
                         void initControls();
                         void initPanel();
-                        void openingTextChanged(const QString &sText);
-                        void URLTextChanged(const QString &sText);
                     public:
                         SourceConfigPanelURL(QWidget *parent);
                         SourceConfigPanelURL(QWidget *parent, Controller &refController);
                         virtual ~SourceConfigPanelURL() = default;
 
+                        virtual bool isOkAble();
                         virtual void reject();
+                    public slots:
+                        void endingTextChanged();
+                        void openingTextChanged();
+                        void URLTextChanged(const QString &sText);
                     };
                 }
             }

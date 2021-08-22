@@ -18,7 +18,7 @@ namespace net
             {
                 class App : public QApplication
                 {
-                    MainWindow mWndMain;
+                    MainWindow *mWndMain;
                     Controller *mPtrController;
                     QList<QString> mLstArgs;
                 protected:
@@ -31,7 +31,7 @@ namespace net
                     void exit();
                     QList<QString> &getArguments();
                     Controller &getController();
-                    MainWindow &getMainWindow();
+                    MainWindow *getMainWindow();
                 };
             }
         }

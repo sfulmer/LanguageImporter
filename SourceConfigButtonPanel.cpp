@@ -2,12 +2,24 @@
 #include <QHBoxLayout>
 #include "SourceConfigButtonPanel.h"
 #include "SourceConfigDialog.h"
+#include "URLButtonObserver.h"
 
+using net::draconia::util::languageimporter::observers::URLButtonObserver;
 using namespace net::draconia::util::languageimporter::ui;
 
 void SourceConfigButtonPanel::cancelClicked()
 {
     static_cast<QDialog *>(parentWidget())->reject();
+}
+
+Controller &SourceConfigButtonPanel::getController() const
+{
+    return(mRefController);
+}
+
+ModelConfigSource &SourceConfigButtonPanel::getModel() const
+{
+    return(getController().getModel().getConfiguration().getSourceConfig());
 }
 
 void SourceConfigButtonPanel::initControls()
@@ -32,6 +44,13 @@ void SourceConfigButtonPanel::okClicked()
     static_cast<SourceConfigDialog *>(parentWidget())->accept();
 }
 
+void SourceConfigButtonPanel::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+
+    getOkButton()->setEnabled(static_cast<SourceConfigDialog *>(parent())->getSourceConfigPanel()->isOkAble());
+}
+
 SourceConfigButtonPanel::SourceConfigButtonPanel(QWidget *parent)
     :   SourceConfigButtonPanel(parent, static_cast<App *>(qApp)->getController())
 { }
@@ -43,13 +62,15 @@ SourceConfigButtonPanel::SourceConfigButtonPanel(QWidget *parent, const Controll
     ,   mBtnOk(nullptr)
 {
     initPanel();
+
+    getModel().addObserver(new URLButtonObserver(getOkButton()));
 }
 
 QPushButton *SourceConfigButtonPanel::getCancelButton()
 {
     if(mBtnCancel == nullptr)
         {
-        mBtnCancel = new QPushButton("Cancel", this);
+        mBtnCancel = new QPushButton("&Cancel", this);
 
         connect(mBtnCancel, &QPushButton::clicked, this, &SourceConfigButtonPanel::cancelClicked);
         }

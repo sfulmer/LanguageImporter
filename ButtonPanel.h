@@ -21,11 +21,13 @@ namespace net
                         Q_OBJECT
 
                         Controller &mRefController;
-                        QPushButton *mBtnReset, *mBtnSave;
+                        QPushButton *mBtnQuit, *mBtnReset, *mBtnSave;
                     protected:
+                        void doQuit();
                         void doReset();
                         void doSave();
                         Controller &getController() const;
+                        QPushButton *getQuitButton();
                         QPushButton *getResetButton();
                         QPushButton *getSaveButton();
                         void initControls();

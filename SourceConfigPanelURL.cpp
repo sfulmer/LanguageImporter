@@ -12,11 +12,11 @@ using net::draconia::util::languageimporter::model::ModelConfigSourceURL;
 using namespace net::draconia::util::languageimporter::observers;
 using namespace net::draconia::util::languageimporter::ui;
 
-void SourceConfigPanelURL::endingTextChanged(const QString &sText)
+void SourceConfigPanelURL::endingTextChanged()
 {
     ModelConfig &model = getController().getModel().getConfiguration();
     if(model.getSource() == "URL")
-        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setEnding(sText);
+        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setEnding(getEndingText()->toPlainText());
 }
 
 
@@ -39,7 +39,7 @@ QTextEdit *SourceConfigPanelURL::getEndingText()
         {
         mTxtEnding = new QTextEdit(this);
 
-        connect(mTxtEnding, SIGNAL(QTextEdit::textChanged(QString&)), this, SLOT(SourceConfigPanelURL::endingTextChanged(QString&)));
+        connect(mTxtEnding, &QTextEdit::textChanged, this, &SourceConfigPanelURL::endingTextChanged);
         }
 
     return(mTxtEnding);
@@ -64,7 +64,7 @@ QTextEdit *SourceConfigPanelURL::getOpeningText()
         {
         mTxtOpening = new QTextEdit(this);
 
-        connect(mTxtOpening, SIGNAL(QTextEdit::textChanged(QString&)), this, SLOT(SourceConfigPanelURL::openingTextChanged(QString&)));
+        connect(mTxtOpening, &QTextEdit::textChanged, this, &SourceConfigPanelURL::openingTextChanged);
         }
 
     return(mTxtOpening);
@@ -89,7 +89,7 @@ QLineEdit *SourceConfigPanelURL::getURLText()
         {
         mTxtURL = new QLineEdit(this);
 
-        connect(mTxtURL, SIGNAL(QLineEdit::textChanged(QString&)), this, SLOT(SourceConfigPanelURL::urlTextChanged(QString&)));
+        connect(mTxtURL, &QLineEdit::textChanged, this, &SourceConfigPanelURL::URLTextChanged);
         }
 
     return(mTxtURL);
@@ -116,19 +116,20 @@ void SourceConfigPanelURL::initPanel()
     initControls();
 }
 
-void SourceConfigPanelURL::openingTextChanged(const QString &sText)
+void SourceConfigPanelURL::openingTextChanged()
 {
     ModelConfig &model = getController().getModel().getConfiguration();
 
     if(model.getSource() == "URL")
-        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setOpening(sText);
+        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setOpening(getOpeningText()->toPlainText());
 }
 
 void SourceConfigPanelURL::URLTextChanged(const QString &sText)
 {
     ModelConfig &model = getController().getModel().getConfiguration();
+
     if(model.getSource() == "URL")
-        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setEnding(sText);
+        static_cast<ModelConfigSourceURL &>(model.getSourceConfig()).setURL(sText);
 }
 
 SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent)
@@ -149,6 +150,13 @@ SourceConfigPanelURL::SourceConfigPanelURL(QWidget *parent, Controller &refContr
     getModel().addObserver(new ModelSourceConfigEndingObserver(getEndingText()));
 
     initPanel();
+}
+
+bool SourceConfigPanelURL::isOkAble()
+{
+    ModelConfigSourceURL &refModel = static_cast<ModelConfigSourceURL &>(getModel());
+
+    return(!refModel.getURL().isEmpty());
 }
 
 void SourceConfigPanelURL::reject()

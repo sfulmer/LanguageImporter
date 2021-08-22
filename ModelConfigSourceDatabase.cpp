@@ -10,6 +10,7 @@ ModelConfigSourceDatabase::ModelConfigSourceDatabase(ModelConfigSourceDatabase &
     :   ModelConfigSource()
     ,   msDatabase(refCopy.getDatabase())
     ,   msDriver(refCopy.getDriver())
+    ,   msHost(refCopy.getHost())
     ,   msLanguageField(refCopy.getLanguageField())
     ,   msLocaleField(refCopy.getLocaleField())
     ,   msTable(refCopy.getTable())
@@ -26,6 +27,11 @@ QString &ModelConfigSourceDatabase::getDatabase()
 QString &ModelConfigSourceDatabase::getDriver()
 {
     return(msDriver);
+}
+
+QString &ModelConfigSourceDatabase::getHost()
+{
+    return(msHost);
 }
 
 QString &ModelConfigSourceDatabase::getLanguageField()
@@ -57,6 +63,14 @@ void ModelConfigSourceDatabase::setDriver(const QString &sDriver)
 
     setChanged();
     notifyObservers("Driver");
+}
+
+void ModelConfigSourceDatabase::setHost(const QString &sHost)
+{
+    msHost = sHost;
+
+    setChanged();
+    notifyObservers("Host");
 }
 
 void ModelConfigSourceDatabase::setLanguageField(const QString &sLanguage)

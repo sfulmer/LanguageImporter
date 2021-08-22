@@ -31,7 +31,6 @@ namespace net
                         QPushButton *mBtnBrowse, *mBtnConfig;
                         QTableView *mTblData;
                     protected:
-                        void dbPathChanged(QString &sDBPath);
                         void doBrowse();
                         void doConfig();
                         QPushButton *getBrowseButton();
@@ -47,11 +46,14 @@ namespace net
                         void initControls();
                         void initPanel();
                         virtual void resizeEvent(QResizeEvent *event);
-                        void sourceChanged(QString &sSource);
+                        void sourceChanged(const QString &sSource);
                     public:
                         MainPanel(QWidget *parent);
                         MainPanel(QWidget *parent, const Controller &refController);
                         ~MainPanel();
+
+                    public slots:
+                        void dbPathChanged(const QString &sDBPath);
                     };
                 }
             }

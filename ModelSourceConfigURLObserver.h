@@ -20,7 +20,6 @@ namespace net
                         QLineEdit *mTxtURL;
                     protected:
                         QLineEdit *getURLText();
-                        void setURLText(QLineEdit *txtURL);
                     public:
                         ModelSourceConfigURLObserver(QLineEdit *txtURL);
                         ~ModelSourceConfigURLObserver() = default;

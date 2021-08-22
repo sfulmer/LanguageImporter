@@ -28,9 +28,7 @@ namespace net
                         SourceConfigPanel *mPnlSourceConfig;
 
                     protected:
-                        SourceConfigButtonPanel *getButtonsPanel();
                         Controller &getController() const;
-                        SourceConfigPanel *getSourceConfigPanel();
                         void initControls();
                         void initDialog();
                     public:
@@ -39,6 +37,9 @@ namespace net
                         ~SourceConfigDialog() = default;
 
                         void reject();
+
+                        SourceConfigButtonPanel *getButtonsPanel();
+                        SourceConfigPanel *getSourceConfigPanel();
                     };
                 }
             }

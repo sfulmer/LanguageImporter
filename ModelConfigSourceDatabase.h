@@ -15,7 +15,7 @@ namespace net
                 {
                     class ModelConfigSourceDatabase : public ModelConfigSource
                     {
-                        QString msDatabase, msDriver, msLanguageField, msLocaleField, msTable;
+                        QString msDatabase, msDriver, msHost, msLanguageField, msLocaleField, msTable;
                     public:
                         ModelConfigSourceDatabase();
                         ModelConfigSourceDatabase(ModelConfigSourceDatabase &refCopy);
@@ -23,11 +23,13 @@ namespace net
 
                         QString &getDatabase();
                         QString &getDriver();
+                        QString &getHost();
                         QString &getLanguageField();
                         QString &getLocaleField();
                         QString &getTable();
                         void setDatabase(const QString &sDatabase);
                         void setDriver(const QString &sDriver);
+                        void setHost(const QString &sHost);
                         void setLanguageField(const QString &sLanguage);
                         void setLocaleField(const QString &sLocale);
                         void setTable(const QString &sTable);
